@@ -7,20 +7,25 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -32,6 +37,7 @@ import com.wkswind.codereader.fileexplorer.sort.SortType;
 public class FileListFragment extends Fragment implements LoaderCallbacks<List<File>>{
 	
 	public static final String FILE_DIRECTORY = "file_directory";
+	public static final String CODE_TYPE = "code_type";//只查询指定后缀名的文件
 	private int LOADER_ID = 1;
 	
 	public static FileListFragment newInstance(Bundle args){
@@ -40,6 +46,7 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		return fragment;
 	}
 	
+	private boolean isSearching = true;
 	private ListView list;
 	private View progressView;
 	private FileAdapter adapter;
@@ -50,6 +57,13 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.file, menu);
+	}
+	
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		super.onPrepareOptionsMenu(menu);
+		menu.setGroupEnabled(R.id.group, !isSearching);
 	}
 	
 	@Override
@@ -72,15 +86,21 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 			break;
 		}
 		return true;
-	}
+	}	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		((ActionBarActivity)getActivity()).getSupportActionBar().setSubtitle(((File)getArguments().getSerializable(FILE_DIRECTORY)).getAbsolutePath());
 		setHasOptionsMenu(true);
+		
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
 		query();
 	}
 	
@@ -105,7 +125,7 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		return view;
 	}
 	
-	static interface IFileSelected{
+	public static interface IFileSelected{
 		public void onFileSelected(File file);
 	}
 	
@@ -144,6 +164,8 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		if(list != null){
 			list.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
+		isSearching = show;
+		getActivity().supportInvalidateOptionsMenu();
 		
 	}
 	
@@ -157,7 +179,14 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		@Override
 		protected List<File> loadDataInBackground(Bundle extras) {
 			// TODO Auto-generated method stub
-			File file = (File) extras.getSerializable(FILE_DIRECTORY);
+			File file = null;
+			String codeType = extras == null ? null : extras.getString(CODE_TYPE);
+			if(extras==null || extras.getSerializable(FILE_DIRECTORY) == null){
+				file = Environment.getExternalStorageDirectory();
+			}else{
+				file = (File) extras.getSerializable(FILE_DIRECTORY);
+			}
+			
 			FilenameFilter filter = new FilenameFilter() {
 				
 				@Override
@@ -166,9 +195,14 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 					return !filename.startsWith(".");
 				}
 			};
+			
 			List<File> rst = new ArrayList<File>();
 			if(file.exists() && file != null){
-				rst = Arrays.asList(file.listFiles(filter));
+				if(TextUtils.isEmpty(codeType)){
+					rst = Arrays.asList(file.listFiles(filter));
+				}else{
+					rst = (List<File>) FileUtils.listFiles(file, new String[]{codeType}, true);
+				}
 				Collections.sort(rst, new SortFolder());
 				return rst;
 			}
@@ -188,7 +222,24 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		// TODO Auto-generated method stub		
 		adapter = new FileAdapter(getActivity(), data);
 		list.setAdapter(adapter);
+		setEmptyView(list);
+//		list.setEmptyView(LayoutInflater.from(getActivity()).inflate(R.layout.empty_view, null));
 		showProgress(false);
+	}
+	
+	private void setEmptyView(AbsListView target) {
+		View old = target.getEmptyView();
+		ViewGroup vg = (ViewGroup) target.getParent();
+		Context ctx = target.getContext();
+		View emptyView = LayoutInflater.from(ctx).inflate(R.layout.empty_view,
+				null);
+		if (vg != null) {
+			if(old != null){
+				vg.removeView(old);
+			}
+			vg.addView(emptyView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+			target.setEmptyView(emptyView);
+		}
 	}
 
 	@Override

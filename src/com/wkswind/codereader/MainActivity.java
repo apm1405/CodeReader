@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
 		s.setSupportMultipleWindows(true);
 		s.setJavaScriptEnabled(true);
 		String action = getIntent().getAction();
-		if (action.equals(Intent.ACTION_VIEW) || action.equals(Intent.ACTION_OPEN_DOCUMENT)) {
+		if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_OPEN_DOCUMENT.equals(action)) {
 			selectedFile = getIntent().getData();
 			if (selectedFile != null
 					&& selectedFile.toString().startsWith("file")) {

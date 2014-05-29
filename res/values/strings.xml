@@ -13,13 +13,25 @@
     <string name="action_sort_by_name">按名称</string>
     <string name="action_sort_by_date">按最后修改日期</string>
     <string name="action_sort_by_size">按文件大小</string>
-    <string name="title_activity_form">FormActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
-
+    
+    <string name="doc_recent">最近打开</string>
+    <string name="doc_star">星标文件</string>
+    <string name="doc_c">c</string>
+    <string name="doc_cpp">c++</string>
+    <string name="doc_css">css</string>
+    <string name="doc_html">html</string>
+    <string name="doc_lisp">lisp</string>
+    <string name="doc_java">java</string>
+    <string name="doc_js">js</string>
+    <string name="doc_lua">lua</string>
+    <string name="doc_perl">perl</string>
+    <string name="doc_python">python</string>
+    <string name="doc_ruby">ruby</string>
+    <string name="doc_sql">sql</string>
+    <string name="doc_vb">vb</string>
+	<string name="doc_xml">xml</string>
+	
+	<string name="empty_root">空空如也</string>
 </resources>

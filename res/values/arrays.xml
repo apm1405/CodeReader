@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="doc_type">
+        <item>@string/doc_recent</item>
+        <item>@string/doc_star</item>
+        <item>@string/doc_c</item>
+        <item>@string/doc_cpp</item>
+        <item>@string/doc_css</item>
+        <item>@string/doc_html</item>
+        <item>@string/doc_java</item>
+        <item>@string/doc_js</item>
+        <item>@string/doc_lisp</item>
+        <item>@string/doc_lua</item>
+        <item>@string/doc_perl</item>
+        <item>@string/doc_python</item>
+        <item>@string/doc_ruby</item>
+        <item>@string/doc_sql</item>
+        <item>@string/doc_vb</item>
+        <item>@string/doc_xml</item>
+    </string-array>
+    
+    <integer-array name="doc_icon">
+        <item>@drawable/ic_root_recent</item>
+        <item>@drawable/ic_root_star</item>
+        <item>@drawable/ic_root_c</item>
+        <item>@drawable/ic_root_cpp</item>
+        <item>@drawable/ic_root_css</item>
+        <item>@drawable/ic_root_html</item>
+        <item>@drawable/ic_root_java</item>
+        <item>@drawable/ic_root_js</item>
+        <item>@drawable/ic_root_lisp</item>
+        <item>@drawable/ic_root_lua</item>
+        <item>@drawable/ic_root_perl</item>
+        <item>@drawable/ic_root_python</item>
+        <item>@drawable/ic_root_ruby</item>
+        <item>@drawable/ic_root_sql</item>
+        <item>@drawable/ic_root_vb</item>
+        <item>@drawable/ic_root_xml</item>
+    </integer-array>
+    
+    <string-array name="doc_intent">
+        <item>recent</item>
+        <item>star</item>
+        <item>c</item>
+        <item>cpp</item>
+        <item>css</item>
+        <item>html</item>
+        <item>java</item>
+        <item>js</item>
+        <item>lisp</item>
+        <item>lua</item>
+        <item>perl</item>
+        <item>python</item>
+        <item>ruby</item>
+        <item>sql</item>
+        <item>vb</item>        
+        <item>xml</item>        
+    </string-array>
+</resources>
