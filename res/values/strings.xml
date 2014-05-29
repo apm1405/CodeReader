@@ -5,15 +5,21 @@
     <string name="file_explorer">文件浏览器</string>
     <string name="action_share">分享</string>
     <string name="action_open">打开文件</string>
-    
     <string name="file_not_exists">文件不存在</string>
     <string name="file_too_large">文件大小不能超过%1$s</string>
-    
     <string name="loading">加载中</string>
     <string name="action_refresh">刷新</string>
     <string name="action_sortby">排序</string>
     <string name="action_sort_by_name">按名称</string>
     <string name="action_sort_by_date">按最后修改日期</string>
     <string name="action_sort_by_size">按文件大小</string>
+    <string name="title_activity_form">FormActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
