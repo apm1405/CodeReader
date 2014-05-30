@@ -150,11 +150,11 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 	void query(){
 		showProgress(true);
 		LoaderManager manager = getLoaderManager();
-		if(manager.getLoader(LOADER_ID) == null){
+//		if(manager.getLoader(LOADER_ID) == null){
 			manager.initLoader(LOADER_ID, getArguments(), this);
-		}else{
-			manager.restartLoader(LOADER_ID, getArguments(), this);
-		}
+//		}else{
+//			manager.restartLoader(LOADER_ID, getArguments(), this);
+//		}
 	}
 	
 	void showProgress(boolean show){
@@ -166,7 +166,6 @@ public class FileListFragment extends Fragment implements LoaderCallbacks<List<F
 		}
 		isSearching = show;
 		getActivity().supportInvalidateOptionsMenu();
-		
 	}
 	
 	static class FileLoader extends AsyncTaskLoaderEx<List<File>>{

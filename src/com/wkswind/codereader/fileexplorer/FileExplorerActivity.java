@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -18,7 +20,7 @@ import com.wkswind.codereader.R;
 import com.wkswind.codereader.fileexplorer.FileListFragment.IFileSelected;
 
 public class FileExplorerActivity extends ActionBarActivity implements
-		IFileSelected {
+		IFileSelected, OnBackStackChangedListener {
 
 	private FragmentManager fm;
 
@@ -61,14 +63,14 @@ public class FileExplorerActivity extends ActionBarActivity implements
 		 * finish(); return true; } } return false; } }); }
 		 * 
 		 * }
-		 */
-
+		 */		
 		if (savedInstanceState == null) {
 			fm = getSupportFragmentManager();
 			Bundle extras = new Bundle();
 			extras.putSerializable(FileListFragment.FILE_DIRECTORY,
 					Environment.getExternalStorageDirectory());
 			Fragment fragment = FileListFragment.newInstance(extras);
+			fm.addOnBackStackChangedListener(this);
 			fm.beginTransaction()
 					.add(android.R.id.content, fragment, fragment.getTag())
 					.addToBackStack(
@@ -121,6 +123,12 @@ public class FileExplorerActivity extends ActionBarActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public void onBackStackChanged() {
+		// TODO Auto-generated method stub
+		Log.i("TAG", "onBackStackChanged");
 	}
 
 }
