@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.wkswind.codereader.MainActivity"
+            android:name="com.wkswind.codereader.ReaderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             
@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.wkswind.codereader.FormActivity"
+            android:name="com.wkswind.codereader.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -51,6 +51,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider android:name="com.wkswind.codereader.database.data.provider.ReadingHistoryProvider"
+            android:authorities="com.wkswind.codereader.database.provider.ReadingHistoryProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>

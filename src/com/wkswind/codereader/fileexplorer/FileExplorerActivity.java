@@ -13,7 +13,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.wkswind.codereader.MainActivity;
+import com.wkswind.codereader.ReaderActivity;
 import com.wkswind.codereader.R;
 import com.wkswind.codereader.fileexplorer.FileListFragment.IFileSelected;
 
@@ -102,9 +102,9 @@ public class FileExplorerActivity extends ActionBarActivity implements
 			// .add(android.R.id.content, fragment)
 					.addToBackStack(file.getAbsolutePath()).commit();
 		} else {
-			if (file.length() > MainActivity.MAXFILESIZE) {
+			if (file.length() > ReaderActivity.MAXFILESIZE) {
 				// Toast.makeText(context, text, duration)
-				Toast.makeText(this, getResources().getString(R.string.file_too_large, FileAdapter.readableFileSize(MainActivity.MAXFILESIZE)), Toast.LENGTH_SHORT)
+				Toast.makeText(this, getResources().getString(R.string.file_too_large, FileAdapter.readableFileSize(ReaderActivity.MAXFILESIZE)), Toast.LENGTH_SHORT)
 				.show();
 				return;
 			}
