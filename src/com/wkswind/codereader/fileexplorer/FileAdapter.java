@@ -42,6 +42,13 @@ public class FileAdapter extends BaseAdapter {
 		files = null;
 	}
 	
+	
+	
+	public void setFiles(List<File> files) {
+		this.files = files;
+//		notifyDataSetChanged();
+	}
+
 	public void sort(SortType type){
 		if(type == SortType.byDefault){
 			Collections.sort(files, new SortFolder());

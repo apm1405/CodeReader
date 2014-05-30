@@ -11,11 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
-import com.wkswind.codereader.fileexplorer.FileListFragment;
+import com.wkswind.codereader.fileexplorer.FileExplorerFragment;
 import com.wkswind.codereader.model.RootInfo;
 
 public class MainActivity extends ActionBarActivity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks, FileListFragment.IFileSelected {
+		NavigationDrawerFragment.NavigationDrawerCallbacks, FileExplorerFragment.IFileSelected {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -59,12 +59,12 @@ public class MainActivity extends ActionBarActivity implements
 		// TODO Auto-generated method stub
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		Bundle args = new Bundle();
-		args.putString(FileListFragment.CODE_TYPE, info.getIntent());
-		args.putSerializable(FileListFragment.FILE_DIRECTORY, Environment.getExternalStorageDirectory());
+		args.putString(FileExplorerFragment.CODE_TYPE, info.getIntent());
+		args.putSerializable(FileExplorerFragment.FILE_DIRECTORY, Environment.getExternalStorageDirectory());
 		fragmentManager
 				.beginTransaction()
 				.replace(R.id.container,
-						FileListFragment.newInstance(args)).commit();		
+						FileExplorerFragment.newInstance(args)).commit();		
 	}
 
 	@Override

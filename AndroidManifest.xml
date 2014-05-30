@@ -19,7 +19,6 @@
             android:name="com.wkswind.codereader.ReaderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -31,7 +30,14 @@
         <activity
             android:name="com.wkswind.codereader.fileexplorer.FileExplorerActivity"
             android:label="@string/file_explorer"
+            android:parentActivityName="com.wkswind.codereader.MainActivity"
             android:screenOrientation="portrait" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wkswind.codereader.MainActivity" />
+
             <intent-filter android:priority="100" >
                 <action android:name="android.intent.action.OPEN_DOCUMENT" />
 
@@ -51,9 +57,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider android:name="com.wkswind.codereader.database.data.provider.ReadingHistoryProvider"
+
+        <provider
+            android:name="com.wkswind.codereader.database.data.provider.ReadingHistoryProvider"
             android:authorities="com.wkswind.codereader.database.provider.ReadingHistoryProvider"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

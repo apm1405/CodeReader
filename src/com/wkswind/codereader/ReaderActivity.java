@@ -18,7 +18,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
@@ -29,7 +28,6 @@ import android.widget.Toast;
 import com.wkswind.codereader.database.data.provider.ReadingHistoryContent;
 import com.wkswind.codereader.database.data.provider.ReadingHistoryContent.Wish.Columns;
 import com.wkswind.codereader.fileexplorer.FileAdapter;
-import com.wkswind.codereader.fileexplorer.FileExplorerActivity;
 import com.wkswind.codereader.synatax.CDocumentHandler;
 import com.wkswind.codereader.synatax.CppDocumentHandler;
 import com.wkswind.codereader.synatax.CssDocumentHandler;
@@ -52,7 +50,7 @@ import com.wkswind.utils.PrefsUtils;
 
 public class ReaderActivity extends ActionBarActivity {
 	private Uri selectedFile;
-	private static final int REQUEST_FILE_CHOOSE = 0;
+	public static final int REQUEST_FILE_CHOOSE = 0;
 	private WebView codeReader;
 
 	public static final int MAXFILESIZE = 1024 * 128;
@@ -64,13 +62,14 @@ public class ReaderActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		codeReader = (WebView) findViewById(R.id.code_reader);
 		codeReader.setWebViewClient(new WebChrome2());
 		WebSettings s = codeReader.getSettings();
 		s.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		s.setUseWideViewPort(false);
 		s.setAllowFileAccess(true);
-//		s.setBuiltInZoomControls(true);
 		s.setLightTouchEnabled(true);
 		s.setLoadsImagesAutomatically(true);
 		s.setSupportZoom(true);
@@ -112,14 +111,11 @@ public class ReaderActivity extends ActionBarActivity {
 		if (selectedFile != null) {
 			outState.putString(LAST_READ, String.valueOf(selectedFile));
 		}
-
 	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-
-		// codeReader.setVisibility(View.GONE);
 		if (selectedFile != null) {
 			PrefsUtils.put(this, LAST_READ, selectedFile.toString());
 		}
@@ -131,7 +127,7 @@ public class ReaderActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.reader, menu);
 		MenuItem menuItem = menu.findItem(R.id.action_share);
 		// Get the provider and hold onto it to set/change the share intent.
 		ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat
@@ -147,7 +143,6 @@ public class ReaderActivity extends ActionBarActivity {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		Log.d("TAG", String.valueOf(selectedFile == null));
 		menu.findItem(R.id.action_share).setEnabled( selectedFile != null);
 		return super.onPrepareOptionsMenu(menu);
 	}
@@ -158,19 +153,17 @@ public class ReaderActivity extends ActionBarActivity {
         shareIntent.setType("text/*");
         shareIntent.putExtra(Intent.EXTRA_STREAM, selectedFile);
 		return shareIntent;
-
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_open) {
-			startActivityForResult(
-					new Intent(this, FileExplorerActivity.class),
-					REQUEST_FILE_CHOOSE);
-			return true;
+	public boolean onOptionsItemSelected(MenuItem item) {		
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+		default:
+			break;
 		}
-		return super.onOptionsItemSelected(item);
+		return true;
 	}
 
 	@Override

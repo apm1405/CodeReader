@@ -34,4 +34,5 @@
 	<string name="doc_xml">xml</string>
 	
 	<string name="empty_root">空空如也</string>
+	<string name="action_starred">星标</string>
 </resources>
