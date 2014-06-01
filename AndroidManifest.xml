@@ -62,6 +62,11 @@
             android:name="com.wkswind.codereader.database.data.provider.ReadingHistoryProvider"
             android:authorities="com.wkswind.codereader.database.provider.ReadingHistoryProvider"
             android:exported="false" />
+
+        <activity
+            android:name="com.wkswind.codereader.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

@@ -23,6 +23,9 @@ import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import com.wkswind.codereader.database.data.provider.ReadingHistoryContent;
@@ -55,6 +58,7 @@ public class ReaderActivity extends ActionBarActivity {
 
 	public static final int MAXFILESIZE = 1024 * 128;
 	private static final String LAST_READ = "last_read";
+	private boolean isStarred = false;
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@SuppressWarnings("deprecation")
@@ -137,6 +141,18 @@ public class ReaderActivity extends ActionBarActivity {
 		// Note that you can set/change the intent any time,
 		// say when the user has selected an image.
 		actionProvider.setShareIntent(createShareIntent());
+		
+		MenuItem starredItem = menu.findItem(R.id.action_starred);
+		CheckBox chkStarred = (CheckBox) MenuItemCompat.getActionView(starredItem);
+		chkStarred.setClickable(true);
+		chkStarred.setOnCheckedChangeListener(new OnCheckedChangeListener() {			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				Toast.makeText(ReaderActivity.this, "starred", Toast.LENGTH_SHORT).show();
+				isStarred = isChecked;
+			}
+		});
 		return true;
 	}
 	
@@ -249,7 +265,7 @@ public class ReaderActivity extends ActionBarActivity {
 		ContentValues values = new ContentValues();
 		values.put(Columns.DATE_TIMESTAMP.getName(), Calendar.getInstance().getTimeInMillis());
 		values.put(Columns.URL.getName(), url);
-		values.put(Columns.STARRED.getName(), false);
+		values.put(Columns.STARRED.getName(), isStarred);
 		cr.insert(ReadingHistoryContent.Wish.CONTENT_URI, values);
 		
 	}

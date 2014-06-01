@@ -1,7 +1,97 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/white"
+    android:layout_height="match_parent" 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:choiceMode="singleChoice"
-    tools:context="com.wkswind.codereader.NavigationDrawerFragment" />
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.wkswind.codereader.NavigationDrawerFragment">
+    <LinearLayout
+        android:id="@+id/recent_doc" 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/item_background"
+	    android:baselineAligned="false"
+	    android:gravity="center_vertical"
+	    android:minHeight="?android:attr/listPreferredItemHeight"
+	    android:orientation="horizontal"
+	    android:paddingBottom="8dp"
+	    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+	    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+	    android:paddingTop="8dp"
+	    android:clickable="true"
+	    tools:targetApi="jelly_bean_mr1">
+	    <ImageView
+	        android:clickable="false"
+	        android:layout_width="@dimen/icon_size"
+	        android:layout_height="@dimen/icon_size"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginRight="12dp"
+	        android:layout_marginLeft="20dp"
+	        android:contentDescription="@null"
+	        android:scaleType="centerInside"
+	        android:background="@drawable/ic_root_recent" />
+	
+	    <TextView
+	        android:clickable="false"
+	        style="@android:style/TextAppearance.Medium"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:ellipsize="middle"
+	        android:singleLine="true"
+	        android:textAlignment="viewStart"
+	        android:text="@string/doc_recent" />
+    </LinearLayout>
+    <View android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="?android:attr/listDivider"/>
+    <LinearLayout
+        android:id="@+id/starred_doc" 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/item_background"
+	    android:baselineAligned="false"
+	    android:gravity="center_vertical"
+	    android:minHeight="?android:attr/listPreferredItemHeight"
+	    android:orientation="horizontal"
+	    android:paddingBottom="8dp"
+	    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+	    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+	    android:paddingTop="8dp"
+	    android:clickable="true"
+	    tools:targetApi="jelly_bean_mr1">
+	    <ImageView
+	        android:clickable="false"
+	        android:layout_width="@dimen/icon_size"
+	        android:layout_height="@dimen/icon_size"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginRight="12dp"
+	        android:layout_marginLeft="20dp"
+	        android:contentDescription="@null"
+	        android:scaleType="centerInside"
+	        android:background="@drawable/ic_root_star" />
+	
+	    <TextView
+	        android:clickable="false"
+	        style="@android:style/TextAppearance.Medium"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_weight="1"
+	        android:ellipsize="middle"
+	        android:singleLine="true"
+	        android:textAlignment="viewStart"
+	        android:text="@string/doc_star" />
+    </LinearLayout>
+    <View android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="?android:attr/listDivider"/>
+	<ListView 
+	    android:id="@+id/code_type"    
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:choiceMode="singleChoice"/>    
+</LinearLayout>
+
+

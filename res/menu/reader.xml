@@ -4,7 +4,8 @@
     tools:context="com.wkswind.codereader.MainActivity" >
     <item android:id="@+id/action_starred"
         app:showAsAction="always"
-        android:title="@string/action_starred"/>
+        android:title="@string/action_starred"
+        app:actionViewClass="com.wkswind.codereader.utils.OptionsMenuCheckBox"/>
 	<item android:id="@+id/action_share"
         app:showAsAction="ifRoom"
         android:title="@string/action_share"
